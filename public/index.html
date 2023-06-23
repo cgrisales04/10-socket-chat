@@ -9,11 +9,26 @@
 
 </head>
 
-<body class="container">
-    <div class="row mt-5">
-        <div class="col-sm-6">
-            <h1>Google Signin</h1>
+<body class="container-fluid">
+    <div class="row">
+        <div class="col-sm-7 vh-100 d-flex flex-column  justify-content-center" style="background: #1d1d1d;">
+            <h1 class="text-white ms-5 me-5 mb-5">Chat - Online</h1>
+            <img src="img/undraw_sign_in_re_o58h.svg" alt="" width="50%" class="ms-5 me-5 mb-5">
+            <p class="text-white ps-5 pe-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
+                obcaecati
+                non in iste numquam ullam
+                adipisci ipsam quas. Aspernatur consequatur labore ea iure ipsam sed quis libero quia repellat non.</p>
+        </div>
+
+        <div class="col-sm-5 d-flex flex-column justify-content-center ps-5 pe-5">
+            <h1>Login</h1>
             <hr>
+            <form class="d-grid">
+                <input type="email" class="form-control mb-2" name="email" placeholder="Email">
+                <input type="password" class="form-control mb-4" name="password" placeholder="Password">
+
+                <button type="submit" class="btn btn-success mb-2">Ingresar</button>
+            </form>
 
             <div id="g_id_onload"
                 data-client_id="1089469773941-of08g601egaacsf3kqtupim9i5n92p1f.apps.googleusercontent.com"
@@ -23,49 +38,12 @@
             <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
                 data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
             </div>
-            <button class="btn btn-danger mt-2" id="g_id_signout">Sign Out</button>
-        </div>
-        <div class="col-sm-6">
 
+            <button class="btn  mt-2" id="g_id_signout">Sign Out</button>
         </div>
+
     </div>
-
-    <script>
-        function handleCredentialResponse(response) {
-
-            const body = { id_token: response.credential }
-            fetch('http://localhost:8080/api/auth/google', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(body)
-            })
-                .then(r => r.json())
-                .then(resp => {
-                    console.log(resp)
-                    localStorage.setItem('email', resp.usuario.correo)
-                })
-                .catch(console.warn)
-        }
-
-
-        const button = document.getElementById('g_id_signout');
-        button.onclick = async () => {
-
-            console.log(google.accounts.id)
-            google.accounts.id.disableAutoSelect()
-            google.accounts.id.revoke(localStorage.getItem('email'), done => {
-                console.log('consent revoked');
-                localStorage.clear()
-                location.reload()
-            });
-        }
-
-
-    </script>
-
-
+    <script src="js/auth.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </body>
 
