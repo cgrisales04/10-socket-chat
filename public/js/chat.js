@@ -44,7 +44,9 @@ const conectarSocket = async () => {
 
   socket.on("recibir-mensajes", (payload) => renderMensajes(payload));
   socket.on("usuarios-activos", (payload) => renderUsuarios(payload));
-  socket.on("mensaje-privado", () => {});
+  socket.on("mensaje-privado", (payload) => {
+    console.log("Privado: ", payload);
+  });
 
   txtMensaje.addEventListener("keyup", ({ keyCode }) => {
     const uid = txtUid.value;
