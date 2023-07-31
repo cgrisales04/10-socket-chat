@@ -88,6 +88,12 @@ const renderMensajes = (mensajes = []) => {
   ulMensajes.innerHTML = mensajesHTML;
 };
 
+btnSalir.onclick = async () => {
+    console.log("consent revoked");
+    localStorage.clear();
+    location.reload();
+};
+
 const main = async () => {
   await validarJWT();
 };
